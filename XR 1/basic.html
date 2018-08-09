@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <!-- add aframe library -->
+    <script src="js/aframe.min.js"></script>
+</head>
+
+<body>
+    <!-- begin scene -->
+    <a-scene>
+      <!-- asset management system -->
+      <a-assets>
+         <img id="boxTexture" src="assets/img/gypsum.jpg">
+     </a-assets>
+        <!-- add elements here -->
+        <a-box src="#boxTexture" scale="2 2 2" rotation="45 90 180" position="0 2 -3"></a-box>
+        <a-sky color="yellow"></a-sky>
+        <a-plane position="0 0 -4" scale="10 10 0.00001" rotation="-90 0 0" color="#7BC8A4"></a-plane>
+    </a-scene>
+</body>
+
+</html>

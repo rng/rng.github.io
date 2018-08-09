@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <script src="js/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="js/aframe-teleport-controls.min.js"></script>
+    <script src="js/aframe-extras.min.js"></script>
+
+</head>
+
+<body>
+
+    <a-scene>
+        <a-assets>
+            <a-mixin id="teleport" teleport-controls="type: parabolic; cameraRig: #cameraRig; defaultPlaneSize: 1000;"></a-mixin>
+            <!-- <img id="boxTexture" src="assets/img/gypsum.jpg"> -->
+            <video id="webcam" playsinline></video>
+            <img id="gndTexture" src="assets/img/grid.jpg">
+            <img id="sky" src="assets/img/env.jpg">
+            <!-- <a-asset-item id="robot" src="assets/models/robot/model.gltf"> -->
+            <a-asset-item id="donut" src="assets/models/Donut_01/Donut_01.gltf">
+            <!-- <a-asset-item id="mech" src="assets/models/model.glb"></a-asset-item> -->
+        </a-assets>
+                <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+
+        <a-sky src="#city"></a-sky>
+
+        <!-- <a-gltf-model src="#mech" position="2.5 5.7 14.5" scale="1 1 1" animation-mixer></a-gltf-model> -->
+        <a-gltf-model src="#donut" scale="3 3 3" position="10 32 -8">
+            <a-animation attribute="rotation"
+                      dur="5000"
+                      to="0 360 360"
+                      repeat="indefinite"
+                      easing="linear"></a-animation>
+            </a-gltf-model>
+
+        <a-entity id="cameraRig" position="60 40 100">
+            <a-entity camera wasd-controls look-controls></a-entity>
+            <a-entity id="rightHand" mixin="teleport" laser-controls="hand: right" oculus-go-controls="hand: right"></a-entity>
+        </a-entity>
+
+        <!-- <a-plane src="#webcam" repeat="1000 1000" position="0 0 -4" scale="500 500 0.00001" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane> -->
+
+        <a-box shadow material="src: #webcam" position="0 25 32" rotation="0 45 45" scale="20 20 20">
+            <a-animation attribute="position" to="10 35 42" direction="alternate" dur="2000" repeat="indefinite">
+            </a-animation>
+            <a-animation attribute="rotation"
+                      dur="5000"
+                      to="0 360 0"
+                      repeat="indefinite"
+                      easing="linear"></a-animation>
+        </a-box>
+
+        <!-- <a-entity environment="preset: tron"></a-entity> -->
+
+
+    </a-scene>
+
+    <script>
+    navigator.mediaDevices.getUserMedia({audio: false, video: true})
+  .then(stream => {
+    let $video = document.querySelector('video')
+    $video.srcObject = stream
+    $video.onloadedmetadata = () => {
+      $video.play()
+    }
+  })
+    </script>
+
+</body>
+
+</html>
